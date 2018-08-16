@@ -8,21 +8,36 @@ import Book from './Book'
 class SearchBook extends Component {
   
 	state = {
-		query : '',
+		query: '',
+		searchedBooks: []
 	}
 
 	updateQuery = (query) => {
-		this.setState({query: query.trim() })
+		this.setState({query: query })
+		this.currentSearch(query)
 	}
 
+	currentSearch = (query) => {
+		if (query) {
+			BooksAPI.search(query).then((searchedBooks) => {
+				searchedBooks.error ? this.setState({searchedBooks: [] }) : this.setState({searchedBooks: searchedBooks})
+				{/*this.setState({searchedBooks: searchedBooks})*/}
+			})} else {
+				this.setState({searchedBooks: [] })
+			}
+		
+	}
+	
+	
+	
 	render() {
-		let showingBooks
+	/*	let showingBooks*/
 		if (this.state.query) {
 			const match = new RegExp(escapeRegExp(this.state.query), 'i')
-			showingBooks = this.props.bookStore.filter((book) => match.test(book.author) || match.test(book.title))
+			{/*showingBooks =*/} this.state.searchedBooks.filter((book) => match.test(book.authors) || match.test(book.title))
 			
 		} else {
-			showingBooks = []
+			this.setState.searchedBooks = []
 		}
 		return (
 		<div className="search-books">
@@ -48,7 +63,7 @@ class SearchBook extends Component {
 			</div>
 			<div className="search-books-results">
 				<ol className="books-grid">
-					{showingBooks.map((book) => (
+					{this.state.searchedBooks.map((book) => (
 										<li>
 											<Book book={book}/>
 										</li>
