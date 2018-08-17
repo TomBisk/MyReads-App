@@ -66,7 +66,7 @@ class SearchBook extends Component {
 					{this.state.searchedBooks.map((newBook) => {
 					 let shelf = "none"
 					 
-					 this.props.bookStore.map(book => ( 
+					 this.props.myBooks.map(book => ( 
 					 	book.id === newBook.id ?
 					 shelf = book.shelf : ''
 					 ))
