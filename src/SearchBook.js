@@ -21,7 +21,7 @@ class SearchBook extends Component {
 		if (query) {
 			BooksAPI.search(query).then((searchedBooks) => {
 				searchedBooks.error ? this.setState({searchedBooks: [] }) : this.setState({searchedBooks: searchedBooks})
-				{/*this.setState({searchedBooks: searchedBooks})*/}
+			
 			})} else {
 				this.setState({searchedBooks: [] })
 			}
@@ -34,7 +34,7 @@ class SearchBook extends Component {
 	/*	let showingBooks*/
 		if (this.state.query) {
 			const match = new RegExp(escapeRegExp(this.state.query), 'i')
-			{/*showingBooks =*/} this.state.searchedBooks.filter((book) => match.test(book.authors) || match.test(book.title))
+		this.state.searchedBooks.filter((book) => match.test(book.authors) || match.test(book.title))
 			
 		} else {
 			this.setState.searchedBooks = []
@@ -64,8 +64,9 @@ class SearchBook extends Component {
 			<div className="search-books-results">
 				<ol className="books-grid">
 					{this.state.searchedBooks.map((book) => (
-										<li>
-											<Book book={book}/>
+										<li key={book.id}>
+											<Book book={book} moveBook={this.props.moveBook}
+currentShelf={this.shelf}/>
 										</li>
 					))}
 			</ol>
