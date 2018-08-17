@@ -6,7 +6,6 @@ import BookShelf from './BookShelf'
 import SearchBook from './SearchBook'
 
 
-
 class BooksApp extends React.Component {
   state = {
  		myBooks : []
@@ -20,10 +19,9 @@ class BooksApp extends React.Component {
 
 	moveBook = (book, shelf) => {
 		BooksAPI.update(book, shelf).then(() => {
-		
-		BooksAPI.getAll().then((myBooks) => {
-			this.setState({myBooks})
-		})
+			BooksAPI.getAll().then((myBooks) => {
+				this.setState({myBooks})
+			})
 		})
 	}
 
@@ -38,8 +36,10 @@ class BooksApp extends React.Component {
 				)}/> 
 				
 				<Route path="/search" render={() => (
-					<SearchBook moveBook={this.moveBook}
-myBooks={this.state.myBooks}/>														
+					<SearchBook 
+						moveBook={this.moveBook}
+						myBooks={this.state.myBooks}
+					/>														
 				)}/>
       </div>
     )
